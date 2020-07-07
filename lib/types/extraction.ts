@@ -1,4 +1,5 @@
 import { SearchQuery } from './searchQuery'
+import { Granularity } from './granularity'
 
 export type ExtractionFunction =
   | RegularExpressionExtraction
@@ -49,7 +50,7 @@ type TimeFormatExtraction = {
   format?: string
   timeZone?: string
   locale?: string
-  // @todo: grunularity?
+  granularity?: Granularity
   asMills?: boolean
 }
 

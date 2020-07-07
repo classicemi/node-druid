@@ -79,3 +79,5 @@ export type FilteredAggregator = {
   filter: Filter
   aggregator: Aggregator
 }
+
+// @todo: Approximate Aggregations
