@@ -1,6 +1,6 @@
 import { SearchQuery } from './searchQuery'
 
-type ExtractionFunction =
+export type ExtractionFunction =
   | RegularExpressionExtraction
   | PartialExtractionFunction
   | SearchQueryExtraction
@@ -10,6 +10,7 @@ type ExtractionFunction =
   | TimeParsingExtraction
   | JavaScriptExtraction
   | RegisteredLookupExtraction
+  | InlineLookupExtraction
   | CascadeExtraction
   | StringFormatExtraction
   | UpperLowerExtraction
@@ -66,12 +67,27 @@ type JavaScriptExtraction = {
 }
 
 // https://druid.apache.org/docs/latest/querying/lookups.html
-// @todo: inline lookup
 type RegisteredLookupExtraction = {
   type: 'registeredLookup'
   lookup: string
   retainMissingValue?: boolean
   replaceMissingValueWith?: string
+  injective?: boolean
+  optimize?: boolean
+}
+
+type InlineLookupExtraction = {
+  type: 'lookup'
+  lookup: {
+    type: 'map'
+    map: {
+      [key: string]: string
+    }
+  }
+  retainMissingValue?: boolean
+  replaceMissingValueWith?: string
+  injective?: boolean
+  optimize?: boolean
 }
 
 type CascadeExtraction = {
